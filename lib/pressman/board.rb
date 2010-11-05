@@ -2,7 +2,7 @@
 
   class InvalidMove < StandardError
   end
- 
+
   class Board < Array
 
     def initialize 
@@ -20,10 +20,11 @@
       self.replace(b)
     end
 
-    def move(src, dst)
-      sx, sy = src
-      dx, dy = dst
-      raise InvalidMove unless valid_move?(sx,sy,dx,dy)
+    # board.move(:user => @black, :src => [1,0], :dst => [2,0])
+    def move(opts)
+      raise InvalidMove unless MoveValidation.valid?(opts.merge(:board => self))
+      sx, sy = opts[:src]
+      dx, dy = opts[:dst]
       self[dx][dy] = self[sx][sy]
       self[sx][sy] = nil
     end

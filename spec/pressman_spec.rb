@@ -8,10 +8,14 @@
     it "should end when on player captures all of the other player's stones"
   end
 
+
+
   describe Pressman::Board do
     
     before do
       @board = Pressman::Board.new
+      @p1    = Pressman::Player.new(:black)
+      @p2    = Pressman::Player.new(:white)
     end
 
     it "should be an 8 x 8 grid" do
@@ -30,23 +34,21 @@
     end
 
     it "should move the pieces" do
-      @board.move([1,0], [4,0])
+      @board.move(:src => [6,7], :dst => [3,4], :player => @p1)
+      @board[3][4].should == :black
+      @board[6][7].should be_nil
+
+      @board.move(:src => [1,0], :dst => [4,0], :player => @p2)
       @board[4][0].should == :white
       @board[1][0].should be_nil
     end
 
     it "should not allow invalid moves" do
-      lambda{ @board.move([1,0], [1,0]) }.should raise_exception( Pressman::InvalidMove )
-      lambda{ @board.move([5,0], [5,0]) }.should raise_exception( Pressman::InvalidMove )
-      lambda{ @board.move([1,0], [1,1]) }.should raise_exception( Pressman::InvalidMove )
-      lambda{ @board.move([6,0], [5,3]) }.should raise_exception( Pressman::InvalidMove )
+      lambda{ @board.move(:src => [1,0], :dst => [1,0], :player => @p1) }.should raise_exception( Pressman::InvalidMove )
+      lambda{ @board.move(:src => [5,0], :dst => [5,0], :player => @p2) }.should raise_exception( Pressman::InvalidMove )
+      lambda{ @board.move(:src => [1,0], :dst => [1,1], :player => @p1) }.should raise_exception( Pressman::InvalidMove )
+      lambda{ @board.move(:src => [6,0], :dst => [5,3], :player => @p2) }.should raise_exception( Pressman::InvalidMove )
     end
-
-   # A stone may only move into a square if no other stone occupies any of the squares between the stone’s current square and its destination square.
-
-   # A stone may not move into a square occupied by another stone of the same colour.
-
-   # A stone may move up, down, left, right, or diagonally within the grid and along any number of free squares, but only one direction per turn.
 
   end
 
