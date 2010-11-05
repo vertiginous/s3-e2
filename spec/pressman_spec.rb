@@ -8,8 +8,6 @@
     it "should end when on player captures all of the other player's stones"
   end
 
-
-
   describe Pressman::Board do
     
     before do
@@ -44,16 +42,30 @@
     end
 
     it "should not allow invalid moves" do
-      lambda{ @board.move(:src => [1,0], :dst => [1,0], :player => @p1) }.should raise_exception( Pressman::InvalidMove )
-      lambda{ @board.move(:src => [5,0], :dst => [5,0], :player => @p2) }.should raise_exception( Pressman::InvalidMove )
-      lambda{ @board.move(:src => [1,0], :dst => [1,1], :player => @p1) }.should raise_exception( Pressman::InvalidMove )
-      lambda{ @board.move(:src => [6,0], :dst => [5,3], :player => @p2) }.should raise_exception( Pressman::InvalidMove )
+      
+      lambda{ @board.move(:src => [1,0], :dst => [4,0], :player => @p1) }.should raise_exception( Pressman::ImproperOwner )
+      lambda{ @board.move(:src => [5,0], :dst => [4,0], :player => @p1) }.should raise_exception( Pressman::EmptySource )
+      lambda{ @board.move(:src => [1,0], :dst => [1,0], :player => @p2) }.should raise_exception( Pressman::NotAnActualMove )
+      lambda{ @board.move(:src => [1,0], :dst => [1,1], :player => @p2) }.should raise_exception( Pressman::CantLandOnSelf )
+      lambda{ @board.move(:src => [6,0], :dst => [5,3], :player => @p1) }.should raise_exception( Pressman::InvalidDirection )
+      @board.move(:src => [6,2], :dst => [5,2], :player => @p1)
+      lambda{ @board.move(:src => [6,0], :dst => [6,2], :player => @p1) }.should raise_exception( Pressman::PathBlocked ) # horizontal path blocked
+      lambda{ @board.move(:src => [7,0], :dst => [5,0], :player => @p1) }.should raise_exception( Pressman::PathBlocked ) # vertical path blocked
+      lambda{ @board.move(:src => [7,0], :dst => [4,3], :player => @p1) }.should raise_exception( Pressman::PathBlocked ) # diagonal path blocked
     end
 
   end
 
   describe Pressman::Player do
-    it "should have a color"
+    before do
+      @player1 = Pressman::Player.new(:black)
+    end
+
+    it "should have a color" do
+      @player1.color.should == :black
+      @player1.color.should_not == :white
+    end
+
     it "should have 16 stones"
     it "should be able to move stones"
     it "should capture opponents stones when moving into a square occupied by the opponent's stone"

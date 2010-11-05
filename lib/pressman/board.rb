@@ -1,8 +1,5 @@
  module Pressman
 
-  class InvalidMove < StandardError
-  end
-
   class Board < Array
 
     def initialize 
@@ -22,18 +19,11 @@
 
     # board.move(:user => @black, :src => [1,0], :dst => [2,0])
     def move(opts)
-      raise InvalidMove unless MoveValidation.valid?(opts.merge(:board => self))
+      MoveValidation.validate(opts.merge(:board => self))
       sx, sy = opts[:src]
       dx, dy = opts[:dst]
       self[dx][dy] = self[sx][sy]
       self[sx][sy] = nil
-    end
-
-    def valid_move?(sx,sy,dx,dy)
-      !self[sx][sy].nil? && 
-      [sx,sy] != [dx,dy] &&
-      self[sx][sy] != self[dx][dy] &&
-      ((sx - dx).abs == (sy - dy).abs || sx == dx || sy == dy) 
     end
 
     PIECES = {
