@@ -6,9 +6,9 @@
       super(8)
       b = self.each_with_index.map do |row, i| 
         case i
-        when 0,1
+        when WHITE_FIRST_ROW, WHITE_SECOND_ROW
           Array.new(8, :white)
-        when 6,7
+        when BLACK_FIRST_ROW, BLACK_SECOND_ROW
           Array.new(8, :black)
         else
           Array.new(8)

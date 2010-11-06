@@ -1,53 +1,61 @@
   describe Pressman::Move do
     
+    def new_move(opts)
+      Pressman::Move.new(opts)
+    end
+
     before do
       @board  = Pressman::Board.new
 
       @p1     = Pressman::Player.new(:black)
-      @move   = Pressman::Move.new(:player => @p1, :board => @board)
+      @move   = new_move(:player => @p1, :board => @board)
 
       @p2     = Pressman::Player.new(:white)
-      @move2  = Pressman::Move.new(:player => @p2, :board => @board)
+      @move2  = new_move(:player => @p2, :board => @board)
     end
     
     it "should move the pieces" do
-      move = Pressman::Move.new(:src => [6,7], :dst => [3,4], :player => @p1, :board => @board)
+      move = new_move(:src => [6,7], :dst => [3,4], :player => @p1, :board => @board)
       move.execute
       @board[3][4].should == :black
       @board[6][7].should be_nil
 
-      move2 = Pressman::Move.new(:src => [1,0], :dst => [4,0], :player => @p2, :board => @board)
+      move2 = new_move(:src => [1,0], :dst => [4,0], :player => @p2, :board => @board)
       move2.execute
       @board[4][0].should == :white
       @board[1][0].should be_nil
     end
 
     it "should not allow invalid moves" do
-      move = Pressman::Move.new(:src => [1,0], :dst => [4,0], :player => @p1, :board => @board)
+      move = new_move(:src => [1,0], :dst => [4,0], :player => @p1, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::ImproperOwner )
 
-      move = Pressman::Move.new(:src => [5,0], :dst => [4,0], :player => @p1, :board => @board)
+      move = new_move(:src => [5,0], :dst => [4,0], :player => @p1, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::EmptySource )
       
-      move = Pressman::Move.new(:src => [1,0], :dst => [1,0], :player => @p2, :board => @board)
+      move = new_move(:src => [1,0], :dst => [1,0], :player => @p2, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::NotAnActualMove )
       
-      move = Pressman::Move.new(:src => [1,0], :dst => [1,1], :player => @p2, :board => @board)
+      move = new_move(:src => [1,0], :dst => [1,1], :player => @p2, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::CantLandOnSelf )
       
-      move = Pressman::Move.new(:src => [6,0], :dst => [5,3], :player => @p1, :board => @board)
+      move = new_move(:src => [6,0], :dst => [5,3], :player => @p1, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::InvalidDirection )
       
-      Pressman::Move.new(:src => [6,2], :dst => [5,2], :player => @p1, :board => @board).execute
-      move = Pressman::Move.new(:src => [6,0], :dst => [6,2], :player => @p1, :board => @board)
+      new_move(:src => [6,2], :dst => [5,2], :player => @p1, :board => @board).execute
+      move = new_move(:src => [6,0], :dst => [6,2], :player => @p1, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::PathBlocked ) # horizontal path blocked
       
-      move = Pressman::Move.new(:src => [7,0], :dst => [5,0], :player => @p1, :board => @board)
+      move = new_move(:src => [7,0], :dst => [5,0], :player => @p1, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::PathBlocked ) # vertical path blocked
       
-      move = Pressman::Move.new(:src => [7,0], :dst => [4,3], :player => @p1, :board => @board)
+      move = new_move(:src => [7,0], :dst => [4,3], :player => @p1, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::PathBlocked ) # diagonal path blocked
     end
+
+    it "should check if generation is allowed"
+    it "should deactivate the piece after generation"
+    it "should activate the piece when it crosses back accross the centerline"
 
     it "should not allow a move when there is nothing in the source square" do
       @move.sx = 1

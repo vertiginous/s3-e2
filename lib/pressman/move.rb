@@ -36,21 +36,12 @@ module Pressman
       @player  = opts[:player]
     end
 
-    # board.move(:user => @black, :src => [1,0], :dst => [2,0])
+    # move.execute(:user => @black, :src => [1,0], :dst => [2,0], :board => @board)
     def execute
       validate
-      res = @board[@dx][@dy] = @board[@sx][@sy]
+      r = @board[@dx][@dy] = @board[@sx][@sy]
       @board[@sx][@sy] = nil
-      generate if generate?
-      res
-    end
-
-    def generate
-      
-    end
-
-    def generate?
-
+      r
     end
 
     def validate
@@ -103,23 +94,23 @@ module Pressman
     def path
       case true
       when horizontal?
-        y_axis.map{|y| @board[@sx][y] }
+        y_points.map{|y| @board[@sx][y] }
       when vertical?
-        x_axis.map{|x| @board[x][@sy] }
+        x_points.map{|x| @board[x][@sy] }
       when diagonal?
-        x_axis.zip(y_axis).map{|x,y| @board[x][y] }
+        x_points.zip(y_points).map{|x,y| @board[x][y] }
       end
     end
 
-    def x_axis
-      cells(@sx,@dx)
+    def x_points
+      points_from(@sx,@dx)
     end
 
-    def y_axis
-      cells(@sy,@dy)
+    def y_points
+      points_from(@sy,@dy)
     end
 
-    def cells(s,d)
+    def points_from(s,d)
       s.send((s < d ? :upto : :downto), d).map{|i| i }[1..-2]
     end
 
