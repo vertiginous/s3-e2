@@ -17,15 +17,6 @@
       self.replace(b)
     end
 
-    # board.move(:user => @black, :src => [1,0], :dst => [2,0])
-    def move(opts)
-      MoveValidation.validate(opts.merge(:board => self))
-      sx, sy = opts[:src]
-      dx, dy = opts[:dst]
-      self[dx][dy] = self[sx][sy]
-      self[sx][sy] = nil
-    end
-
     PIECES = {
       :black => '| # ',
       :white => '|' + ' # '.yellow.bold,

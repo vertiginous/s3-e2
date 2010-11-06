@@ -31,29 +31,6 @@
       @board[7].each{|i| i.should == :black }
     end
 
-    it "should move the pieces" do
-      @board.move(:src => [6,7], :dst => [3,4], :player => @p1)
-      @board[3][4].should == :black
-      @board[6][7].should be_nil
-
-      @board.move(:src => [1,0], :dst => [4,0], :player => @p2)
-      @board[4][0].should == :white
-      @board[1][0].should be_nil
-    end
-
-    it "should not allow invalid moves" do
-      
-      lambda{ @board.move(:src => [1,0], :dst => [4,0], :player => @p1) }.should raise_exception( Pressman::ImproperOwner )
-      lambda{ @board.move(:src => [5,0], :dst => [4,0], :player => @p1) }.should raise_exception( Pressman::EmptySource )
-      lambda{ @board.move(:src => [1,0], :dst => [1,0], :player => @p2) }.should raise_exception( Pressman::NotAnActualMove )
-      lambda{ @board.move(:src => [1,0], :dst => [1,1], :player => @p2) }.should raise_exception( Pressman::CantLandOnSelf )
-      lambda{ @board.move(:src => [6,0], :dst => [5,3], :player => @p1) }.should raise_exception( Pressman::InvalidDirection )
-      @board.move(:src => [6,2], :dst => [5,2], :player => @p1)
-      lambda{ @board.move(:src => [6,0], :dst => [6,2], :player => @p1) }.should raise_exception( Pressman::PathBlocked ) # horizontal path blocked
-      lambda{ @board.move(:src => [7,0], :dst => [5,0], :player => @p1) }.should raise_exception( Pressman::PathBlocked ) # vertical path blocked
-      lambda{ @board.move(:src => [7,0], :dst => [4,3], :player => @p1) }.should raise_exception( Pressman::PathBlocked ) # diagonal path blocked
-    end
-
   end
 
   describe Pressman::Player do

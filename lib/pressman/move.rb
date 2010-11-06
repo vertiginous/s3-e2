@@ -21,10 +21,10 @@ module Pressman
   class PathBlocked < InvalidMove
   end
 
-  class MoveValidation
+  class Move
 
-    def self.validate(opts)
-      new(opts).validate
+    def self.execute(opts)
+      new(opts).execute
     end
 
     attr_accessor :sx, :sy, :dx, :dy
@@ -34,6 +34,23 @@ module Pressman
       @dx, @dy = opts[:dst]
       @board   = opts[:board]
       @player  = opts[:player]
+    end
+
+    # board.move(:user => @black, :src => [1,0], :dst => [2,0])
+    def execute
+      validate
+      res = @board[@dx][@dy] = @board[@sx][@sy]
+      @board[@sx][@sy] = nil
+      generate if generate?
+      res
+    end
+
+    def generate
+      
+    end
+
+    def generate?
+
     end
 
     def validate

@@ -9,4 +9,4 @@ end
 require 'pressman/game'
 require 'pressman/board'
 require 'pressman/player'
-require 'pressman/move_validation'
+require 'pressman/move'
