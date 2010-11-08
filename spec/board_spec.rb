@@ -12,13 +12,13 @@
     end
 
     it "should start with 16 white pieces in the top two rows" do
-      @board[0].each{|i| i.should == :white }
-      @board[1].each{|i| i.should == :white }
+      @board[0].each{|i| i.color.should == :white }
+      @board[1].each{|i| i.color.should == :white }
     end
 
     it "should start with 16 black pieces in the bottom two rows" do
-      @board[6].each{|i| i.should == :black }
-      @board[7].each{|i| i.should == :black }
+      @board[6].each{|i| i.color.should == :black }
+      @board[7].each{|i| i.color.should == :black }
     end
 
   end

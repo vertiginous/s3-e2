@@ -49,7 +49,7 @@ module Pressman
       raise ImproperOwner    unless proper_owner? 
       raise NotAnActualMove  unless actual_move? 
       raise CantLandOnSelf   unless not_landing_on_self? 
-      raise InvalidDirection unless  valid_path? 
+      raise InvalidDirection unless valid_path? 
       raise PathBlocked      unless path_free?
     end
 
@@ -58,7 +58,7 @@ module Pressman
     end
 
     def proper_owner?
-      @board[@sx][@sy] == @player.color
+      @board[@sx][@sy].color == @player.color
     end
 
     def actual_move?

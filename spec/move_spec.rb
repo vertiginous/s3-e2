@@ -17,12 +17,12 @@
     it "should move the pieces" do
       move = new_move(:src => [6,7], :dst => [3,4], :player => @p1, :board => @board)
       move.execute
-      @board[3][4].should == :black
+      @board[3][4].color.should == :black
       @board[6][7].should be_nil
 
       move2 = new_move(:src => [1,0], :dst => [4,0], :player => @p2, :board => @board)
       move2.execute
-      @board[4][0].should == :white
+      @board[4][0].color.should == :white
       @board[1][0].should be_nil
     end
 
