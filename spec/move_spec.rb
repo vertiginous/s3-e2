@@ -53,10 +53,6 @@
       lambda{ move.execute }.should raise_exception( Pressman::PathBlocked ) # diagonal path blocked
     end
 
-    it "should check if generation is allowed"
-    it "should deactivate the piece after generation"
-    it "should activate the piece when it crosses back accross the centerline"
-
     it "should not allow a move when there is nothing in the source square" do
       @move.sx = 1
       @move.sy = 0
