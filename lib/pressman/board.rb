@@ -27,12 +27,14 @@
       self[player.home_row].any?{|s| s.nil? }
     end
 
-    def active_stone_in_opponents_home_row?(player)
-      x = player.opposite_home_row
-      y = nil
-      self[x].each_with_index{|s,i| y = i if s.is_a?(Stone) && s.color == player.color && s.active? }
-      [x,y] if y
+    def active_stone_in_opponents_home_row(player)
+      self[player.opposite_home_row].find{|s| s.is_a?(Stone) && s.color == player.color && s.active? }
     end
+
+    def empty_squares_in(row)
+      self[row].select{|i| i.nil?}.count
+    end
+
   end
 
 end

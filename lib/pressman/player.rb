@@ -24,6 +24,21 @@
       @color == :white ? BLACK_FIRST_ROW : WHITE_FIRST_ROW
     end
 
+    # user interface NOT IMPLEMENTED
+
+    # should return source and destination coordinates
+    # in a hash, or nil if the player resigns
+    # {:src => [x,y]. :dst => [x2,y2]}
+    def get_move
+      raise NotImplementedError
+    end
+
+    # should prompt the user and return true 
+    #  if the user wants to generate a new stone
+    def generate?
+      raise NotImplementedError
+    end
+
   end
 
 end

@@ -47,13 +47,24 @@
     end
 
     describe "active_stone_in_opponents_home_row" do
-      it "should return coordinates of an active stone in the given player's opponent's home row, or nil" do
-        @board.active_stone_in_opponents_home_row?(@black).should be_nil
-        @board[0][0] = Pressman::Stone.new(:black)
-        @board.active_stone_in_opponents_home_row?(@black).should == [0,0]
+      it "should return an active stone in the given player's opponent's home row, or nil if there isn't one" do
+        @board.active_stone_in_opponents_home_row(@black).should be_nil
+
+        stone = Pressman::Stone.new(:black)
+        @board[0][0] = stone
+        @board.active_stone_in_opponents_home_row(@black).should eql stone
+
+        stone.deactivate
+        @board.active_stone_in_opponents_home_row(@black).should be_nil
       end
     end
 
-      
+    describe "empty_squares_in" do
+      it "should return the count of empty squares in a given row" do
+        @board.empty_squares_in(7).should be_zero
+        @board[7][0] = nil
+        @board.empty_squares_in(7).should == 1
+      end
+    end
 
   end
