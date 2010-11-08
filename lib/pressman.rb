@@ -7,6 +7,9 @@ module Pressman
   WHITE_FIRST_ROW  = 0
   WHITE_SECOND_ROW = 1
 
+  BLACK_SIDE       = (4..7)
+  WHITE_SIDE       = (0..3)
+
 end
 
 require 'pressman/game'

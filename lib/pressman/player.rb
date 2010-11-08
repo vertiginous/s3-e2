@@ -24,6 +24,9 @@
       @color == :white ? BLACK_FIRST_ROW : WHITE_FIRST_ROW
     end
 
+    def side
+      @color == :white ? WHITE_SIDE : BLACK_SIDE
+    end
     # user interface NOT IMPLEMENTED
 
     # should return source and destination coordinates

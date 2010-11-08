@@ -18,4 +18,8 @@ describe Pressman::Player do
     @player1.home_row.should == Pressman::BLACK_FIRST_ROW
     @player1.opposite_home_row.should == Pressman::WHITE_FIRST_ROW
   end
+
+  it "should have a side" do
+    @player1.side.should == Pressman::BLACK_SIDE
+  end
 end
