@@ -1,10 +1,4 @@
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
-require 'rubygems'
-require 'term/ansicolor'
-
-class String
-  include Term::ANSIColor
-end
 
 module Pressman
 

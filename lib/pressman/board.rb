@@ -23,19 +23,6 @@
       end
     end
 
-    PIECES = {
-      :black => '| # ',
-      :white => '|' + ' # '.yellow.bold,
-      nil    => '|   '
-    }
-
-    def to_s
-      nl      = "\n"
-      line    = ('-' * 33) + nl
-      end_row = "|#{nl}#{line}"
-      line + map{|row| row.map{|c| PIECES[c] }.join + end_row }.join
-    end
-
   end
 
 end
