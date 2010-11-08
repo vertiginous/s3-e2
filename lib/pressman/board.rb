@@ -17,6 +17,12 @@
       self.replace(b)
     end
 
+    def pieces?(player)
+      self.any? do |row| 
+        row.any?{|square| square.color == player.color rescue nil }
+      end
+    end
+
     PIECES = {
       :black => '| # ',
       :white => '|' + ' # '.yellow.bold,

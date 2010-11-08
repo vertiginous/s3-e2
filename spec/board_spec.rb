@@ -2,8 +2,8 @@
     
     before do
       @board = Pressman::Board.new
-      @p1    = Pressman::Player.new(:black)
-      @p2    = Pressman::Player.new(:white)
+      @black = Pressman::Player.new(:black)
+      @white = Pressman::Player.new(:white)
     end
 
     it "should be an 8 x 8 grid" do
@@ -19,6 +19,21 @@
     it "should start with 16 black pieces in the bottom two rows" do
       @board[6].each{|i| i.color.should == :black }
       @board[7].each{|i| i.color.should == :black }
+    end
+
+    describe "pieces?" do
+
+      it "should return true if the given player still has stones on the board" do
+        @board.pieces?(@black).should == true
+        @board.pieces?(@white).should == true
+      end
+
+      it "should return false if the given player doesn't have any stones on the board" do
+        @board.clear
+        @board.pieces?(@black).should == false
+        @board.pieces?(@white).should == false
+      end
+
     end
 
   end
