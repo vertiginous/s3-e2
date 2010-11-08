@@ -41,6 +41,7 @@ module Pressman
       validate
       r = @board[@dx][@dy] = @board[@sx][@sy]
       @board[@sx][@sy] = nil
+      r.activate if activate?
       r
     end
 
@@ -87,6 +88,10 @@ module Pressman
 
     def path_free?
       path.none?
+    end
+
+    def activate?
+      @sx == @player.opposite_home_row && @player.side.include?(@dx)
     end
 
     # helper methods

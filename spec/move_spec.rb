@@ -162,12 +162,36 @@
       @move.dx = 0
       @move.dy = 2
       @move.path_free?.should be_false
-      
+
       @move.sx = 7
       @move.sy = 7
       @move.dx = 4
       @move.dy = 4
       @move.path_free?.should be_false
    end
+
+   describe "activate?" do
+    it "should check the move to see if it qualifies the stone for reactivation" do
+      @board[0][0] = Pressman::Stone.new(:black)
+      move = new_move(:src => [0,0], :dst => [4,0], :player => @p1, :board => @board)
+      move.activate?.should be_true
+
+      @board[0][0] = Pressman::Stone.new(:black)
+      move = new_move(:src => [0,0], :dst => [3,0], :player => @p1, :board => @board)
+      move.activate?.should be_false
+    end
+   end
+
+   it "should activate the stone if it needs to be" do
+      stone = Pressman::Stone.new(:black)
+      stone.deactivate
+      @board[0][0] = stone
+      @board[1][0] = nil
+
+      move = new_move(:src => [0,0], :dst => [4,0], :player => @p1, :board => @board)
+      move.execute
+      @board[4][0].should eql stone
+      @board[4][0].should be_active
+    end
 
   end
