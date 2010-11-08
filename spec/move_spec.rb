@@ -160,6 +160,18 @@
     end
 
    # A stone may only move into a square if no other stone occupies any of the squares between the stone’s current square and its destination square.
-   it "should check for stones in the path of the move" 
+   it "should check for stones in the path of the move" do 
+      @move.sx = 0
+      @move.sy = 0
+      @move.dx = 0
+      @move.dy = 2
+      @move.path_free?.should be_false
+      
+      @move.sx = 7
+      @move.sy = 7
+      @move.dx = 4
+      @move.dy = 4
+      @move.path_free?.should be_false
+   end
 
   end
