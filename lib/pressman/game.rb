@@ -14,34 +14,24 @@
     def play
       players = [@black, @white]
       until @winner
-        player, opponent = players 
-        player.make_a_move
-        # generate if generate?
-        @winner = opponent if player.resigned?
-        @winner = player   unless @board.pieces?(opponent)
+        @current, @opponent = players 
+        Move.new(@current.get_move.merge(:player => @current, :board => @board)).execute
+
+        #generate
+
+        @winner = @opponent if current.resigned?
+        @winner = @current  unless @board.pieces?(@opponent)
         players.reverse!
       end
     end
 
     # def generate
-    #   @board[@dx][@dy]
+    #   if @board.empty_square_in_home_row?(@current) && active_stone = @board.active_stone_in_opponents_home_row(@current)
+    #     x,y = active_stone
+    #     @board[x][y].deactivate if 
+    #   end
     # end
 
-    # def generate?
-    #   move_is_to_opposite_home_row? && empty_spot_in_home_row? && piece_is_active?
-    # end
-
-    # def move_is_to_opposite_home_row?
-    #   @player.opposite_home_row == @dx
-    # end
-
-    # def empty_spot_in_home_row?
-    #   !@board[@player.home_row].all?
-    # end
-
-    # def piece_is_active?
-    #   @board[@dx][@dy].active?
-    # end
   end
 
 end

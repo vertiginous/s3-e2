@@ -24,16 +24,34 @@
     describe "pieces?" do
 
       it "should return true if the given player still has stones on the board" do
-        @board.pieces?(@black).should == true
-        @board.pieces?(@white).should == true
+        @board.pieces?(@black).should be_true
+        @board.pieces?(@white).should be_true
       end
 
       it "should return false if the given player doesn't have any stones on the board" do
         @board.clear
-        @board.pieces?(@black).should == false
-        @board.pieces?(@white).should == false
+        @board.pieces?(@black).should be_false
+        @board.pieces?(@white).should be_false
       end
 
     end
+
+    describe "empty_square_in_home_row?" do
+      it "should return true if there is an empty square in the given player's home row" do
+        @board.empty_square_in_home_row?(@black).should be_false
+        @board[7][0] = nil
+        @board.empty_square_in_home_row?(@black).should be_true
+      end
+    end
+
+    describe "active_stone_in_opponents_home_row" do
+      it "should return coordinates of an active stone in the given player's opponent's home row, or nil" do
+        @board.active_stone_in_opponents_home_row?(@black).should be_nil
+        @board[0][0] = Pressman::Stone.new(:black)
+        @board.active_stone_in_opponents_home_row?(@black).should == [0,0]
+      end
+    end
+
+      
 
   end
