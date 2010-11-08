@@ -35,16 +35,10 @@
         active_stone && current.generate?
 
         active_stone.deactivate
-        coords = @board.empty_squares_in(current.home_row)
-        generate_stone(:player => current, :dst => coords)
+        x,y = @board.empty_squares_in(current.home_row)
+        @board[x][y] = Stone.new(player.color)  
       end
     end      
-
-    def generate_stone(opts)
-      x,y = opts[:dst]
-      color = opts[:player].color
-      @board[x][y] = Stone.new(color)  
-    end
 
     def move(opts)
       Move.new(move.merge(:player => current, :board => @board)).execute
