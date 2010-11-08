@@ -21,7 +21,7 @@
         @winner = opponent and break if current.resigned?
 
         move(coordinatess)
-        generate(current) if 
+        generate(current) 
 
         @winner = current unless @board.pieces?(opponent)
         players.reverse!
