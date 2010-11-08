@@ -7,9 +7,9 @@
       b = self.each_with_index.map do |row, i| 
         case i
         when WHITE_FIRST_ROW, WHITE_SECOND_ROW
-          Array.new(8, Stone.new(:white))
+          Array.new(8){ Stone.new(:white) }
         when BLACK_FIRST_ROW, BLACK_SECOND_ROW
-          Array.new(8, Stone.new(:black))
+          Array.new(8){ Stone.new(:black) }
         else
           Array.new(8)
         end

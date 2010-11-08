@@ -1,7 +1,6 @@
  module Pressman
 
   class Stone
-    include Comparable
 
     attr_reader :color
     def initialize(color)
@@ -9,9 +8,9 @@
       @active = true
     end
 
-    def <=>(other)
-      false if other.nil?
-      self.color <=> other.color
+    def ==(other)
+      return false if other.nil?
+      self.color == other.color
     end
 
     def active?

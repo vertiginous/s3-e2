@@ -11,6 +11,15 @@ describe Pressman::Stone do
     @stone.should be_active
   end
 
+  describe "equality" do
+    it "should determine equality by stone color" do
+      black = Pressman::Stone.new(:black)
+      white = Pressman::Stone.new(:white)
+      @stone.should == black
+      @stone.should_not == white
+    end
+  end
+
   describe "deactivate" do
     it "should mark the stone inactive" do
       @stone.deactivate

@@ -14,11 +14,13 @@
     it "should start with 16 white pieces in the top two rows" do
       @board[0].each{|i| i.color.should == :white }
       @board[1].each{|i| i.color.should == :white }
+      @board[0][0].should_not eql @board[0][1]
     end
 
     it "should start with 16 black pieces in the bottom two rows" do
       @board[6].each{|i| i.color.should == :black }
       @board[7].each{|i| i.color.should == :black }
+      @board[7][0].should_not eql @board[7][1]
     end
 
     describe "pieces?" do
