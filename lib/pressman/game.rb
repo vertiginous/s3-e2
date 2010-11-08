@@ -25,9 +25,12 @@
 
         Move.new(move.merge(:player => current, :board => @board)).execute
 
-        if @board.empty_square_in_home_row?(@current) && active_stone = @board.active_stone_in_opponents_home_row(@current)  && @current.generate?
+        if @board.empty_square_in_home_row?(current) && 
+          active_stone = @board.active_stone_in_opponents_home_row(current) &&
+          current.generate?
+
           active_stone.deactivate
-          coords = @board.empty_squares_in(@current.home_row)
+          coords = @board.empty_squares_in(current.home_row)
           generate_stone(:player => current, :dst => coords)
         end
         
