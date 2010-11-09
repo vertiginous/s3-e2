@@ -17,10 +17,10 @@
         current, opponent = players
 
         # player gives move coordinates or resigns
-        coordinatess = current.get_move 
+        coordinates = current.get_move 
         @winner = opponent and break if current.resigned?
 
-        move(coordinatess.merge(:player => current)
+        move(coordinates.merge(:player => current))
         generate(current) 
 
         @winner = current unless @board.pieces?(opponent)
