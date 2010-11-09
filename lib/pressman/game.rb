@@ -26,7 +26,7 @@
         @winner = current unless @board.pieces?(opponent)
         players.reverse!
       end
-      announce_winner
+      players.each{|p| p.announce_winner(@winner) }
     end
 
     def generate(player)
@@ -42,10 +42,6 @@
 
     def move(opts)
       Move.new( move.merge(:board => @board) ).execute
-    end
-
-    def announce_winner
-      raise NotImplementedError
     end
 
   end

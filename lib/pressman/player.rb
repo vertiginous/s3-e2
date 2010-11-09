@@ -42,6 +42,9 @@
       raise NotImplementedError
     end
 
+    def announce_winner(player)
+      raise NotImplementedError
+    end
   end
 
 end
