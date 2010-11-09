@@ -27,6 +27,7 @@
     def side
       @color == :white ? WHITE_SIDE : BLACK_SIDE
     end
+
     # user interface NOT IMPLEMENTED
 
     # should return source and destination coordinates
