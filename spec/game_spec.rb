@@ -6,13 +6,25 @@ describe Pressman::Game do
     @white = @game.instance_variable_get(:@white)
     @black.stub!(:generate?).and_return(true)
     @black.stub!(:choose_square).and_return{|i| i.first }
+    @black.stub!(:get_move).and_return(:src => [6,0], :dst => [3,0])
+    @white.stub!(:get_move).and_return(:src => [1,0], :dst => [2,0])
+    @black.stub!(:announce_winner).and_return(true)
+    @white.stub!(:announce_winner).and_return(true)
   end
 
-  # it "should have a board"
-  # it "should have two players"
-  # it "should start with the black player"
-  # it "should end if one player captures all of the other player's stones"
-  # it "should end if one player resigns"
+  it "should end if one player captures all of the other player's stones" do
+
+    @board[0] = Array.new(8)
+    @board[1] = Array.new(8)
+    @game.play
+    @game.winner.should == @black
+  end
+
+  it "should end if one player resigns" do
+    @white.resign
+    @game.play
+    @game.winner.should == @black
+  end
 
   it "should generate a new stone if necesary" do
     @board[1][0] = nil

@@ -42,7 +42,7 @@
     end      
 
     def move(opts)
-      Move.new( move.merge(:board => @board) ).execute
+      Move.new( opts.merge(:board => @board) ).execute
     end
 
   end
