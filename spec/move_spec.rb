@@ -7,7 +7,7 @@
     before do
       @board  = Pressman::Board.new
       @black     = Pressman::Player.new(:black)
-      @p2     = Pressman::Player.new(:white)
+      @white     = Pressman::Player.new(:white)
     end
     
     it "should move the pieces" do
@@ -16,7 +16,7 @@
       @board[3][4].color.should == :black
       @board[6][7].should be_nil
 
-      move2 = new_move(:src => [1,0], :dst => [4,0], :player => @p2, :board => @board)
+      move2 = new_move(:src => [1,0], :dst => [4,0], :player => @white, :board => @board)
       move2.execute
       @board[4][0].color.should == :white
       @board[1][0].should be_nil
@@ -29,10 +29,10 @@
       move = new_move(:src => [5,0], :dst => [4,0], :player => @black, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::EmptySource )
       
-      move = new_move(:src => [1,0], :dst => [1,0], :player => @p2, :board => @board)
+      move = new_move(:src => [1,0], :dst => [1,0], :player => @white, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::NotAnActualMove )
       
-      move = new_move(:src => [1,0], :dst => [1,1], :player => @p2, :board => @board)
+      move = new_move(:src => [1,0], :dst => [1,1], :player => @white, :board => @board)
       lambda{ move.execute }.should raise_exception( Pressman::CantLandOnSelf )
       
       move = new_move(:src => [6,0], :dst => [5,3], :player => @black, :board => @board)
