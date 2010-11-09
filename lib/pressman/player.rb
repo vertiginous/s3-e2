@@ -39,9 +39,15 @@
     # should prompt the user and return true 
     #  if the user wants to generate a new stone
     def generate?
-      raise NotImplementedError
+      true
+      # raise NotImplementedError
     end
 
+    def choose_square(squares)
+      squares.first
+      # raise NotImplementedError
+    end
+  
     def announce_winner(player)
       raise NotImplementedError
     end

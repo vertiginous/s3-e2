@@ -61,9 +61,9 @@
 
     describe "empty_squares_in" do
       it "should return the count of empty squares in a given row" do
-        @board.empty_squares_in(7).should be_zero
+        @board.empty_squares_in(7).should == []
         @board[7][0] = nil
-        @board.empty_squares_in(7).should == 1
+        @board.empty_squares_in(7).should == [0]
       end
     end
 

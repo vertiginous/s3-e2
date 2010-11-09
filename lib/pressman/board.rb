@@ -32,7 +32,7 @@
     end
 
     def empty_squares_in(row)
-      self[row].select{|i| i.nil?}.count
+      self[row].each_with_index.map{|s, i| i if s.nil?}.compact
     end
 
   end
