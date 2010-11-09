@@ -31,7 +31,7 @@
 
     def generate(player)
       active_stone = @board.active_stone_in_opponents_home_row(player)
-      if @board.empty_square_in_home_row?(player) && 
+      if @board.empty_square_in_home_row?(player) &&
         active_stone && player.generate?
         active_stone.deactivate
         x = player.home_row
