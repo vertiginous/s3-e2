@@ -20,7 +20,7 @@
         coordinatess = current.get_move 
         @winner = opponent and break if current.resigned?
 
-        move(coordinatess)
+        move(coordinatess.merge(:player => current)
         generate(current) 
 
         @winner = current unless @board.pieces?(opponent)
@@ -30,18 +30,18 @@
     end
 
     def generate(player)
-      active_stone = @board.active_stone_in_opponents_home_row(current)
-      if @board.empty_square_in_home_row?(current) && 
-        active_stone && current.generate?
+      active_stone = @board.active_stone_in_opponents_home_row(player)
+      if @board.empty_square_in_home_row?(player) && 
+        active_stone && player.generate?
 
         active_stone.deactivate
-        x,y = @board.empty_squares_in(current.home_row)
+        x,y = @board.empty_squares_in(player.home_row)
         @board[x][y] = Stone.new(player.color)  
       end
     end      
 
     def move(opts)
-      Move.new(move.merge(:player => current, :board => @board)).execute
+      Move.new( move.merge(:board => @board) ).execute
     end
 
     def announce_winner
