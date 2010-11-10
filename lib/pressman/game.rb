@@ -33,10 +33,13 @@
       active_stone = @board.active_stone_in_opponents_home_row(player)
       if @board.empty_square_in_home_row?(player) &&
         active_stone && player.generate?
+
         active_stone.deactivate
+        
         x = player.home_row
         empties = @board.empty_squares_in(player.home_row) 
         y = empties.count == 1 ? empties.first : player.choose_square(empties)
+        
         @board[x][y] = Stone.new(player.color)  
       end
     end      

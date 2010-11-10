@@ -30,7 +30,13 @@ describe Pressman::Game do
       @board[1][0] = nil
       @board[0][0] = nil
       @board[7][0] = nil
-      Pressman::Move.new(:player => @black, :src => [6,0], :dst => [0,0], :board => @board).execute
+      Pressman::Move.new(
+        :player => @black, 
+        :src => [6,0], 
+        :dst => [0,0], 
+        :board => @board
+        ).execute
+
       @game.generate(@black)
       @board[0][0].should_not be_active
       @board[7][0].should_not be_nil
@@ -43,7 +49,13 @@ describe Pressman::Game do
       @board[0][1] = nil
       @board[7][0] = nil
       @board[7][1] = nil
-      Pressman::Move.new(:player => @black, :src => [6,1], :dst => [0,1], :board => @board).execute
+      Pressman::Move.new(
+        :player => @black, 
+        :src => [6,1], 
+        :dst => [0,1], 
+        :board => @board
+        ).execute
+      
       @game.generate(@black)
       @board[0][1].should_not be_active
       @board[7][1].should_not be_nil

@@ -34,7 +34,9 @@
     end
 
     def active_stone_in_opponents_home_row(player)
-      self[player.opposite_home_row].find{|s| s.is_a?(Stone) && s.color == player.color && s.active? }
+      self[player.opposite_home_row].find do |s| 
+        s.is_a?(Stone) && s.color == player.color && s.active?
+      end
     end
 
     def empty_squares_in(row)

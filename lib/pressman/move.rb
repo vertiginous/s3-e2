@@ -24,7 +24,12 @@ module Pressman
       @player  = opts[:player]
     end
 
-    # move.execute(:user => @black, :src => [1,0], :dst => [2,0], :board => @board)
+    # move.execute(
+    #   :user => @black, 
+    #   :src => [1,0], 
+    #   :dst => [2,0], 
+    #   :board => @board
+    # )
     def execute
       validate
       r = @board[@dx][@dy] = @board[@sx][@sy]

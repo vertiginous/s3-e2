@@ -25,12 +25,12 @@
 
     describe "pieces?" do
 
-      it "should return true if the given player still has stones on the board" do
+      it "should be true if the player still has stones on the board" do
         @board.pieces?(@black).should be_true
         @board.pieces?(@white).should be_true
       end
 
-      it "should return false if the given player doesn't have any stones on the board" do
+      it "should be false if the player doesn't have any stones on the board" do
         @board.clear
         @board.pieces?(@black).should be_false
         @board.pieces?(@white).should be_false
@@ -39,7 +39,7 @@
     end
 
     describe "empty_square_in_home_row?" do
-      it "should return true if there is an empty square in the given player's home row" do
+      it "should be true if there's an empty square in the player's home row" do
         @board.empty_square_in_home_row?(@black).should be_false
         @board[7][0] = nil
         @board.empty_square_in_home_row?(@black).should be_true
@@ -47,14 +47,14 @@
     end
 
     describe "active_stone_in_opponents_home_row" do
-      it "should return an active stone in the given player's opponent's home row, or nil if there isn't one" do
-        @board.active_stone_in_opponents_home_row(@black).should be_nil
 
-        stone = Pressman::Stone.new(:black)
-        @board[0][0] = stone
-        @board.active_stone_in_opponents_home_row(@black).should eql stone
+      it "should return an active stone in the opponent's home row" do  
+        @stone = Pressman::Stone.new(:black)
+        @board[0][0] = @stone
+        @board.active_stone_in_opponents_home_row(@black).should eql @stone
+      end
 
-        stone.deactivate
+      it "should be nil otherwise" do
         @board.active_stone_in_opponents_home_row(@black).should be_nil
       end
     end
