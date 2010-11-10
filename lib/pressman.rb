@@ -11,6 +11,8 @@ module Pressman
 
 end
 
+require 'forwardable'
+
 require 'pressman/game'
 require 'pressman/board'
 require 'pressman/player'

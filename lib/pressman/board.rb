@@ -1,10 +1,10 @@
  module Pressman
 
-  class Board < Array
+  class Board
+    extend Forwardable
 
     def initialize 
-      super(8)
-      b = self.each_with_index.map do |row, i| 
+      @b = Array.new(8).each_with_index.map do |row, i| 
         case i
         when WHITE_FIRST_ROW, WHITE_SECOND_ROW
           Array.new(8){ Stone.new(:white) }
@@ -14,11 +14,17 @@
           Array.new(8)
         end
       end
-      self.replace(b)
     end
 
+    def_delegator :@b, :[]
+    def_delegator :@b, :[]=
+    def_delegator :@b, :any?
+    def_delegator :@b, :clear
+    def_delegator :@b, :size
+    def_delegator :@b, :each
+
     def pieces?(player)
-      self.any? do |row| 
+      any? do |row| 
         row.any?{|s| s.is_a?(Stone) && s.color == player.color }
       end
     end
