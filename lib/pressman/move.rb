@@ -1,25 +1,13 @@
 module Pressman
 
-  class InvalidMove < StandardError
-  end
+  InvalidMove = Class.new(StandardError)
 
-  class EmptySource < InvalidMove
-  end
-
-  class ImproperOwner < InvalidMove
-  end
-
-  class NotAnActualMove < InvalidMove
-  end
-
-  class CantLandOnSelf < InvalidMove
-  end
-
-  class InvalidDirection < InvalidMove
-  end
-
-  class PathBlocked < InvalidMove
-  end
+  EmptySource      = Class.new(InvalidMove)
+  ImproperOwner    = Class.new(InvalidMove)
+  NotAnActualMove  = Class.new(InvalidMove)
+  CantLandOnSelf   = Class.new(InvalidMove)
+  InvalidDirection = Class.new(InvalidMove)
+  PathBlocked      = Class.new(InvalidMove)
 
   class Move
 
